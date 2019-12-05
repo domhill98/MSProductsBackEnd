@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSProductsBackEnd", "MSProductsBackEnd\MSProductsBackEnd.csproj", "{FE2E31EB-929C-4074-A96E-44CF3F6255D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSProductsBackEnd.API", "MSProductsBackEnd\MSProductsBackEnd.API.csproj", "{FE2E31EB-929C-4074-A96E-44CF3F6255D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSProductsBackEnd.Data", "AzureDBConn\MSProductsBackEnd.Data.csproj", "{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FE2E31EB-929C-4074-A96E-44CF3F6255D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE2E31EB-929C-4074-A96E-44CF3F6255D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2E31EB-929C-4074-A96E-44CF3F6255D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

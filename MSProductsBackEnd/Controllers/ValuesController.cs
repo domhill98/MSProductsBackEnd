@@ -4,8 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MSProductsBackEnd.Controllers
+namespace MSProductsBackEnd.API.Controllers
 {
+    //TO DO:
+    //Deploy to asure portal
+    //Set connection string to the asure portal as an environment variable
+    //Set up deployment into a pipeline
+    //Set up JUnit testing
+
+
+
+
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
