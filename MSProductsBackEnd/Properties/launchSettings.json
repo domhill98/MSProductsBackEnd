@@ -14,7 +14,7 @@
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
-        "DBConnection": "Server=(localdb)\\mssqllocaldb;Database=RepriseMyProducks;Trusted_Connection=True;MultipleActiveResultSets=true",
+        "DBConnection": "Server=(localdb)\\mssqllocaldb;Database=MSProductsBackEnd;Trusted_Connection=True;MultipleActiveResultSets=true",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

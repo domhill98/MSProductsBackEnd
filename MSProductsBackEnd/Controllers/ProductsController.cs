@@ -34,31 +34,35 @@ namespace MSProductsBackEnd.API.Controllers
         //    return product;
         //}
 
-        public IEnumerable<Product> Products(Guid category, Guid brand, string text) 
-        {
-            IEnumerable<Product> prods = _context.Products.Include(r => r.Category).Include(r => r.Brand);
+        //public IEnumerable<Product> Products(Guid category, Guid brand, string text) 
+        //{
+        //    IEnumerable<Product> prods = _context.Products.Include(r => r.Category).Include(r => r.Brand);
 
-            if(category != null) 
-            {
-                prods = prods.Where(x => x.CategoryId == category);
-            }
-            if(brand != null) 
-            {
-                prods = prods.Where(x => x.BrandId == brand);
-            }
-            if(text != null) 
-            {
-                prods = prods.Where(x => x.Name.Contains(text, StringComparison.OrdinalIgnoreCase) || x.Description.Contains(text, StringComparison.OrdinalIgnoreCase));
-            }
+        //    if(category != null) 
+        //    {
+        //        prods = prods.Where(x => x.CategoryId == category);
+        //    }
+        //    if(brand != null) 
+        //    {
+        //        prods = prods.Where(x => x.BrandId == brand);
+        //    }
+        //    if(text != null) 
+        //    {
+        //        prods = prods.Where(x => x.Name.Contains(text, StringComparison.OrdinalIgnoreCase) || x.Description.Contains(text, StringComparison.OrdinalIgnoreCase));
+        //    }
 
-            return prods;
-        }
+        //    return prods;
+        //}
 
         
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            var test = _context.Products;
+
+            var test2 = test.ToList();
+
             return new string[] { "value1", "value2" };
         }
 
@@ -66,9 +70,9 @@ namespace MSProductsBackEnd.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>>  Get(Guid id)
         {
-            var test = _context.Products.ToList();
+            var test = _context.Products;
 
-            var product =  _context.Products.Where(x => x.Id == id).FirstOrDefault();
+            var product =  _context.Products.Find(id);
             
             if(product == null) 
             {

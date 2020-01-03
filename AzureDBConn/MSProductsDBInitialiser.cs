@@ -18,31 +18,40 @@ namespace MSProductsBackEnd.Data
 
             var categories = new List<Category>
             {
-                new Category { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1"), Name = "Cat1", Description = "Cat1" },
-                new Category { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2"), Name = "Cat2", Description = "Cat2" },
-                new Category { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa3"), Name = "Cat3", Description = "Cat3" },
-                new Category { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa4"), Name = "Cat4", Description = "Cat4" },
+                new Category { Name = "Covers", Description = "Davison Stores pride ourselves on our poor range of covers for your mobile device at premium prices.  If you're lukcy your phone or tablet will be protected from any dents, scratches and scuffs." },
+                new Category { Name = "Case", Description = "Browse our wide range of cases for phones and tablets that will help you to keep your mobile device protected from the elements."},
+                new Category { Name = "Accessories", Description = "We stock a small range of phone and tablet accessories, including car holders, sports armbands, stylus pens and very little else." },
+                new Category { Name = "Screen Protectors", Description = "Exclusive Davison Stores screen protectors for your phone or tablet."}
             };
-            categories.ForEach(c => context.Category.Add(c));
+            categories.ForEach(c => context.Categories.Add(c));
 
             var brands = new List<Brand>
             {
-                new Brand { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1"), Name = "Brand1" },
-                new Brand { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2"), Name = "Brand2" },
-                new Brand { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa3"), Name = "Brand3" }
+                new Brand { Name = "Soggy Sponge"},
+                new Brand { Name = "Damp Squib" },
+                new Brand { Name = "iStuff-R-Us" }
             };
-            brands.ForEach(c => context.Brands.Add(c));
+            brands.ForEach(b => context.Brands.Add(b));
 
             await context.SaveChangesAsync();
 
             var products = new List<Product>
             {
-                new Product { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1"), Name = "Prod1", Brand = brands[0], Category = categories[0], Description = "Prod1", Price = 1.0, StockLevel = 10},
-                new Product { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2"), Name = "Prod2", Brand = brands[0], Category = categories[1], Description = "Prod2", Price = 2.0, StockLevel = 5},
-                new Product { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa3"), Name = "Prod3", Brand = brands[1], Category = categories[2], Description = "Prod3", Price = 3.0, StockLevel = 3},
-                new Product { Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa4"), Name = "Prod4", Brand = brands[0], Category = categories[3], Description = "Prod4", Price = 4.0, StockLevel = 1}
+                new Product { Brand = brands[0], Category = categories[0], Description = "Poor quality fake faux leather cover loose enough to fit any mobile device.", Name = "Wrap It and Hope Cover", Price = 6.0m, StockLevel = 1 },
+                new Product { Brand = brands[1], Category = categories[0], Description = "Purchase you favourite chocolate and use the provided heating element to melt it into the perfect cover for your mobile device.", Name = "Chocolate Cover", Price = 10.97m, StockLevel = 0 },
+                new Product { Brand = brands[2], Category = categories[0], Description = "Lamely adapted used and dirty teatowel.  Guaranteed fewer than two holes.", Name = "Cloth Cover", Price = 3.01m, StockLevel = 6 },
+                new Product { Brand = brands[0], Category = categories[1], Description = "Especially toughen and harden sponge entirely encases your device to prevent any interaction.", Name = "Harden Sponge Case", Price = 9.99m, StockLevel = 2 },
+                new Product { Brand = brands[0], Category = categories[1], Description = "Place your device within the water-tight container, fill with water and enjoy the cushioned protection from bumps and bangs.", Name = "Water Bath Case", Price = 20.0m, StockLevel = 3 },
+                new Product { Brand = brands[0], Category = categories[2], Description = "Keep you smartphone handsfree with this large assembly that attaches to your rear window wiper (Hatchbacks only).", Name = "Smartphone Car Holder", Price = 110.01m, StockLevel = 8 },
+                new Product { Brand = brands[0], Category = categories[2], Description = "Keep your device on your arm with this general purpose sticky tape.", Name = "Sticky Tape Sport Armband", Price = 2.99m, StockLevel = 23 },
+                new Product { Brand = brands[1], Category = categories[2], Description = "Stengthen HB pencils guaranteed to leave a mark.", Name = "Real Pencil Stylus", Price = 0.99m, StockLevel = 5 },
+                new Product { Brand = brands[0], Category = categories[3], Description = "Coat your mobile device screen in a scratch resistant, opaque film.", Name = "Spray Paint Screen Protector", Price = 4.99m, StockLevel = 1 },
+                new Product { Brand = brands[2], Category = categories[3], Description = "For his or her sensory pleasure. Fits few known smartphones.", Name = "Rippled Screen Protector", Price = 7.99m, StockLevel = 5 },
+                new Product { Brand = brands[2], Category = categories[3], Description = "For an odour than lingers on your device.", Name = "Fish Scented Screen Protector", Price = 2.88m, StockLevel = 0 },
+                new Product { Brand = brands[1], Category = categories[3], Description = "Guaranteed not to conduct electical charge from your fingers.", Name = "Non-conductive Screen Protector", Price = 10.0m, StockLevel = 10 },
             };
-            products.ForEach(c => context.Products.Add(c));
+            products.ForEach(p => context.Products.Add(p));
+
             await context.SaveChangesAsync();
 
         }
