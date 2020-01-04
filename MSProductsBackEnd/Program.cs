@@ -26,7 +26,7 @@ namespace MSProductsBackEnd.API
                 if (env.IsDevelopment()) 
                 {
                     var context = services.GetRequiredService<MSProductsDB>();
-                    context.Database.Migrate();                   
+                    context.Database.Migrate();
                     try
                     {
                         MSProductsDBInitialiser.SeedTestData(context, services).Wait();

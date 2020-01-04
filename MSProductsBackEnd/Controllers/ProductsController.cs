@@ -57,21 +57,17 @@ namespace MSProductsBackEnd.API.Controllers
         
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Product>> Get()
         {
-            var test = _context.Products;
-
-            var test2 = test.ToList();
-
-            return new string[] { "value1", "value2" };
+            var products = _context.Products.AsEnumerable();
+         
+            return Ok(products);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>>  Get(Guid id)
         {
-            var test = _context.Products;
-
             var product =  _context.Products.Find(id);
             
             if(product == null) 

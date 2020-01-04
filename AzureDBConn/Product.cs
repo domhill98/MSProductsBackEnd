@@ -7,6 +7,7 @@ namespace MSProductsBackEnd.Data
 {
     public class Product
     {
+        [Key]
         public Guid Id { get; set; }
         public Guid CategoryId { get; set; }
         public Guid BrandId { get; set; }
