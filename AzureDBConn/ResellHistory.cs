@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MSProductsBackEnd.Data
 {
-    class ResellHistory
+    public class ResellHistory
     {
         public Guid Id { get; set; }
 

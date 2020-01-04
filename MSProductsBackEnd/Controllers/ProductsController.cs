@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MSProductsBackEnd.API.Models;
 using MSProductsBackEnd.Data;
 
 namespace MSProductsBackEnd.API.Controllers
@@ -26,57 +28,54 @@ namespace MSProductsBackEnd.API.Controllers
             _context = context;
         }
 
-
-
-        //public async Task<Product> Products(Guid id) 
-        //{
-        //    var product = await _context.Products.Include(r => r.Brand).Include(r => r.Category).FirstOrDefaultAsync(r => r.Id == id);                  
-        //    return product;
-        //}
-
-        //public IEnumerable<Product> Products(Guid category, Guid brand, string text) 
-        //{
-        //    IEnumerable<Product> prods = _context.Products.Include(r => r.Category).Include(r => r.Brand);
-
-        //    if(category != null) 
-        //    {
-        //        prods = prods.Where(x => x.CategoryId == category);
-        //    }
-        //    if(brand != null) 
-        //    {
-        //        prods = prods.Where(x => x.BrandId == brand);
-        //    }
-        //    if(text != null) 
-        //    {
-        //        prods = prods.Where(x => x.Name.Contains(text, StringComparison.OrdinalIgnoreCase) || x.Description.Contains(text, StringComparison.OrdinalIgnoreCase));
-        //    }
-
-        //    return prods;
-        //}
-
-        
-        // GET api/values
+       
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public ActionResult<IEnumerable<Product>> GetProducts()
         {
-            var products = _context.Products.AsEnumerable();
+            var products = _context.Products.Include(p => p.Brand).Include(p => p.Category).AsEnumerable();
          
             return Ok(products);
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>>  Get(Guid id)
+        public async Task<ActionResult<Product>>  GetProduct(Guid id)
         {
-            var product =  _context.Products.Find(id);
+            var product = await _context.Products.Include(p => p.Brand).Include(p => p.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
             
             if(product == null) 
             {
                 return NotFound();
             }
                    
-            return product;
+            return Ok(product);
         }
+
+
+        [HttpGet("Filtered")]
+        public ActionResult<IEnumerable<Product>> GetFilteredProducts([FromBody]FilterAPI filter) 
+        {
+            var prods = _context.Products.Include(r => r.Category).Include(r => r.Brand).AsEnumerable();
+
+            if (filter.categoryId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                prods = prods.Where(x => x.CategoryId == filter.categoryId);
+            }
+            if (filter.brandId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                prods = prods.Where(x => x.BrandId == filter.brandId);
+            }
+            if (filter.text != null)
+            {
+                prods = prods.Where(x => x.Name.Contains(filter.text, StringComparison.OrdinalIgnoreCase) || x.Description.Contains(filter.text, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return Ok(prods);
+        }
+
+
+
+
+
 
         // POST api/values
         [HttpPost]

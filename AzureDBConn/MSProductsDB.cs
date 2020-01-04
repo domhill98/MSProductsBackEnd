@@ -13,7 +13,11 @@ namespace MSProductsBackEnd.Data
 
         public DbSet<Product> Products { get; set; }
          
-        
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<ResellHistory> ResellHistory { get; set; }
+
+        public DbSet<OrderHistory> OrderHistory { get; set; }
 
         public MSProductsDB(DbContextOptions<MSProductsDB> options) : base(options)
         {
@@ -44,12 +48,35 @@ namespace MSProductsBackEnd.Data
             {
                 x.Property(p => p.Name).IsRequired();
                 x.Property(p => p.Description).IsRequired();
+                x.Property(p => p.Price).IsRequired();
+                x.Property(p => p.StockLevel).IsRequired();
                 x.HasOne(p => p.Category).WithMany()
                                          .HasForeignKey(p => p.CategoryId)
                                          .IsRequired();
                 x.HasOne(p => p.Brand).WithMany()
                                       .HasForeignKey(p => p.BrandId)
                                       .IsRequired();
+            });
+
+
+            modelBuilder.Entity<Review>(x => {
+                x.Property(p => p.ReviewerId).IsRequired();
+                x.Property(p => p.ReviewerName).IsRequired();
+                x.Property(p => p.Rating).IsRequired();
+                x.Property(p => p.Show).IsRequired();
+            });
+
+            modelBuilder.Entity<ResellHistory>(x => {
+                x.Property(p => p.productId).IsRequired();
+                x.Property(p => p.userId).IsRequired();
+                x.Property(p => p.oldPrice).IsRequired();
+                x.Property(p => p.newPrice).IsRequired();
+                x.Property(p => p.created).IsRequired();
+            });
+
+            modelBuilder.Entity<OrderHistory>(x => {
+                x.Property(p => p.productId).IsRequired();
+                x.Property(p => p.userId).IsRequired();
             });
 
         }

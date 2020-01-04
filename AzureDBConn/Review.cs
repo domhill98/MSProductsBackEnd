@@ -5,8 +5,9 @@ using System.Text;
 
 namespace MSProductsBackEnd.Data
 {
-    class Review
+    public class Review
     {
+        [Key]
         public Guid Id { get; set; }
 
         public Guid ProductId { get; set; }
@@ -14,7 +15,7 @@ namespace MSProductsBackEnd.Data
         public Guid ReviewerId { get; set; }
 
         [MaxLength(100)]
-        public string RevierName { get; set; }
+        public string ReviewerName { get; set; }
 
         public int Rating { get; set; }
 
