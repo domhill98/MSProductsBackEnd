@@ -9,10 +9,10 @@ COPY ["MSProductsBackEnd/MSProductsBackEnd.API.csproj", "MSProductsBackEnd/"]
 RUN dotnet restore "MSProductsBackEnd/MSProductsBackEnd.API.csproj"
 COPY . .
 WORKDIR "/src/MSProductsBackEnd"
-RUN dotnet build "MSProductsBackEnd.api.csproj" -c Release -o /app
+RUN dotnet build "MSProductsBackEnd.API.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "MSProductsBackEnd.api.csproj" -c Release -o /app
+RUN dotnet publish "MSProductsBackEnd.API.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
