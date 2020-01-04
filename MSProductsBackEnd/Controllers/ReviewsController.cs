@@ -8,18 +8,84 @@ using MSProductsBackEnd.Data;
 
 namespace MSProductsBackEnd.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Reviews")]
     [ApiController]
     public class ReviewsController : ControllerBase
     {
         private readonly MSProductsDB _context;
 
+        public ReviewsController(MSProductsDB context)
+        {
+            _context = context;
+        }
+
+
+
+
         [HttpGet("{prodID}")]
         public ActionResult<IEnumerable<Review>> GetReviews(Guid prodID)
         {
-            var reviews = "";
+            var reviews = _context.Reviews.Where(x => x.ProductId == prodID || x.Show == true).AsEnumerable();
 
             return Ok(reviews);
         }
+
+
+        [HttpGet("Create")]
+        public async Task<ActionResult<string>> CreateReview([FromBody] Review dto)
+        {
+            try
+            {
+                await _context.Reviews.AddAsync(dto);
+                await _context.SaveChangesAsync();
+                return Ok("Success");
+
+            }
+            catch (Exception)
+            {
+                //dto.Id = Guid.NewGuid();
+                //var tryAgain = CreateReview(dto);
+                
+                //if (tryAgain.Result.Result.ToString() == "Success")
+                //{
+                //    return Ok("Success");
+                //}
+
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("Hide/{reviewID}")]
+        public async Task<ActionResult<string>> HideReview(Guid reviewID) 
+        {
+            var review = await _context.Reviews.FindAsync(reviewID);
+            
+            if(review == null) 
+            {
+                return NotFound("Review not found");
+            }
+
+            try
+            {
+                review.Show = false;
+                _context.Reviews.Update(review);
+                await _context.SaveChangesAsync();
+                return Ok("Success");
+            }
+            catch (Exception) 
+            {
+                return BadRequest();
+            }
+
+        }
+
+
+
+
+
+
+
+        
+
     }
 }

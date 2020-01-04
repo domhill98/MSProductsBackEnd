@@ -8,11 +8,18 @@ using MSProductsBackEnd.Data;
 
 namespace MSProductsBackEnd.API.Controllers
 {
+
     [Route("api/Categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
         private readonly MSProductsDB _context;
+
+        public CategoriesController(MSProductsDB context)
+        {
+            _context = context;
+        }
+
 
         [HttpGet]
         public ActionResult<IEnumerable<Category>> GetCategories()

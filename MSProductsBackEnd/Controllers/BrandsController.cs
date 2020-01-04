@@ -14,6 +14,13 @@ namespace MSProductsBackEnd.API.Controllers
     {
         private readonly MSProductsDB _context;
 
+        public BrandsController(MSProductsDB context)
+        {
+            _context = context;
+        }
+
+
+
         [HttpGet]
         public ActionResult<IEnumerable<Brand>> GetBrands()
         {
