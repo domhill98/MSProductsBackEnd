@@ -68,7 +68,6 @@ namespace MSProductsBackEnd.Data
 
             modelBuilder.Entity<ResellHistory>(x => {
                 x.Property(p => p.productId).IsRequired();
-                x.Property(p => p.userId).IsRequired();
                 x.Property(p => p.oldPrice).IsRequired();
                 x.Property(p => p.newPrice).IsRequired();
                 x.Property(p => p.created).IsRequired();

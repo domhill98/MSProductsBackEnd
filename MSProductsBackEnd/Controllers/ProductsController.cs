@@ -33,7 +33,12 @@ namespace MSProductsBackEnd.API.Controllers
         public ActionResult<IEnumerable<Product>> GetProducts()
         {
             var products = _context.Products.Include(p => p.Brand).Include(p => p.Category).AsEnumerable();
-         
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+
             return Ok(products);
         }
 
@@ -41,20 +46,25 @@ namespace MSProductsBackEnd.API.Controllers
         public async Task<ActionResult<Product>>  GetProduct(Guid id)
         {
             var product = await _context.Products.Include(p => p.Brand).Include(p => p.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
-            
-            if(product == null) 
+
+            if (product == null)
             {
                 return NotFound();
             }
-                   
+
             return Ok(product);
         }
-
 
         [HttpGet("Filtered")]
         public ActionResult<IEnumerable<Product>> GetFilteredProducts([FromBody]FilterAPI filter) 
         {
             var prods = _context.Products.Include(r => r.Category).Include(r => r.Brand).AsEnumerable();
+
+            if (prods == null)
+            {
+                return NotFound();
+            }
+
 
             if (filter.categoryId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
@@ -71,28 +81,102 @@ namespace MSProductsBackEnd.API.Controllers
 
             return Ok(prods);
         }
-
-
-
-
-
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+    
+        [HttpGet("Price/{prodID}")]
+        public async Task<ActionResult<double>> GetResellPrice(Guid prodID) 
         {
+            var product = await _context.Products.FindAsync(prodID);
+
+            if(product == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(product.Price);           
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("Price/{prodID}")]
+        public async Task<ActionResult> SetResellPrice(Guid prodID, [FromBody] decimal price) 
         {
+            var product = await _context.Products.FindAsync(prodID);
+
+            if(product == null) 
+            {
+                return NotFound();
+            }
+
+            try 
+            {
+                
+                ResellHistory newModel = new ResellHistory()
+                {
+                    Id = new Guid(),
+                    productId = prodID,
+                    oldPrice = product.Price,
+                    newPrice = price,
+                    created = DateTime.Now
+
+                };
+
+                product.Price = price;
+                _context.Products.Update(product);
+                await _context.SaveChangesAsync();
+
+                _context.ResellHistory.Add(newModel);
+                await _context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception e) 
+            {
+                return BadRequest(e);
+            }         
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        [HttpGet("Resell/{prodID}")]
+        public ActionResult<IEnumerable<ResellHistory>> GetResellHistory(Guid prodID)
         {
+            var resell = _context.ResellHistory.Where(x => x.productId == prodID).AsEnumerable();
+
+            if (resell == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(resell);
         }
+
+
+        [HttpPost("Resell")]
+        public async Task<ActionResult> UpdateResellHistory([FromBody] ResellHistory dto) 
+        {
+            if(dto.productId == null) 
+            {
+                return BadRequest();
+            }
+
+            try 
+            {
+                dto.created = DateTime.Now;
+                dto.Id = Guid.NewGuid();
+                _context.ResellHistory.Add(dto);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch(Exception e) 
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 }

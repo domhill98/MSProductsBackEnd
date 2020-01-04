@@ -31,7 +31,7 @@ namespace MSProductsBackEnd.API.Controllers
         }
 
 
-        [HttpGet("Create")]
+        [HttpPost("Create")]
         public async Task<ActionResult<string>> CreateReview([FromBody] Review dto)
         {
             try
@@ -55,7 +55,7 @@ namespace MSProductsBackEnd.API.Controllers
             }
         }
 
-        [HttpGet("Hide/{reviewID}")]
+        [HttpPut("Hide/{reviewID}")]
         public async Task<ActionResult<string>> HideReview(Guid reviewID) 
         {
             var review = await _context.Reviews.FindAsync(reviewID);
