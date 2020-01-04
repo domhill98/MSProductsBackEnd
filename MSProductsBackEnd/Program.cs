@@ -23,7 +23,7 @@ namespace MSProductsBackEnd.API
             {
                 var services = scope.ServiceProvider;
                 var env = services.GetRequiredService<IHostingEnvironment>();
-                if (env.IsDevelopment()) 
+                if (env.IsDevelopment())
                 {
                     var context = services.GetRequiredService<MSProductsDB>();
                     context.Database.Migrate();
