@@ -65,11 +65,11 @@ namespace MSProductsBackEnd.API.Controllers
                 return Ok(prods);
             }
 
-            if (filter.categoryId != Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa0"))
+            if (filter.categoryId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
                 prods = prods.Where(x => x.CategoryId == filter.categoryId);
             }
-            if (filter.brandId != Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa0"))
+            if (filter.brandId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
                 prods = prods.Where(x => x.BrandId == filter.brandId);
             }
