@@ -62,9 +62,8 @@ namespace MSProductsBackEnd.API.Controllers
 
             if (prods == null)
             {
-                return NotFound();
+                return Ok(prods);
             }
-
 
             if (filter.categoryId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
@@ -95,7 +94,7 @@ namespace MSProductsBackEnd.API.Controllers
             return Ok(product.Price);           
         }
 
-        [HttpPut("Price/{prodID}")]
+        [HttpPost("Price/{prodID}")]
         public async Task<ActionResult> SetResellPrice(Guid prodID, [FromBody] decimal price) 
         {
             var product = await _context.Products.FindAsync(prodID);

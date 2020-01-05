@@ -32,13 +32,13 @@ namespace MSProductsBackEnd.API.Controllers
 
 
         [HttpPost("Create")]
-        public async Task<ActionResult<string>> CreateReview([FromBody] Review dto)
+        public async Task<ActionResult> CreateReview([FromBody] Review dto)
         {
             try
             {
                 await _context.Reviews.AddAsync(dto);
                 await _context.SaveChangesAsync();
-                return Ok("Success");
+                return Ok();
 
             }
             catch (Exception)
@@ -55,14 +55,14 @@ namespace MSProductsBackEnd.API.Controllers
             }
         }
 
-        [HttpPut("Hide/{reviewID}")]
-        public async Task<ActionResult<string>> HideReview(Guid reviewID) 
+        [HttpGet("Hide/{reviewID}")]
+        public async Task<ActionResult> HideReview(Guid reviewID) 
         {
             var review = await _context.Reviews.FindAsync(reviewID);
             
             if(review == null) 
             {
-                return NotFound("Review not found");
+                return NotFound();
             }
 
             try
@@ -70,7 +70,7 @@ namespace MSProductsBackEnd.API.Controllers
                 review.Show = false;
                 _context.Reviews.Update(review);
                 await _context.SaveChangesAsync();
-                return Ok("Success");
+                return Ok();
             }
             catch (Exception) 
             {
