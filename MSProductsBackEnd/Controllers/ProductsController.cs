@@ -55,7 +55,7 @@ namespace MSProductsBackEnd.API.Controllers
             return Ok(product);
         }
 
-        [HttpGet("Filtered")]
+        [HttpPost("Filtered")]
         public ActionResult<IEnumerable<Product>> GetFilteredProducts([FromBody]FilterAPI filter) 
         {
             var prods = _context.Products.Include(r => r.Category).Include(r => r.Brand).AsEnumerable();
