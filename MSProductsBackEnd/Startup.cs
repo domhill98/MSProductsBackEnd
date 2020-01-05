@@ -45,6 +45,7 @@ namespace MSProductsBackEnd.API
         {
             if (env.IsDevelopment())
             {
+
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 
