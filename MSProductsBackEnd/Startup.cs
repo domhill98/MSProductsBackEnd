@@ -27,7 +27,7 @@ namespace MSProductsBackEnd.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var conn = Environment.GetEnvironmentVariable("DBConnection");
+            var conn = Configuration.GetConnectionString("DBConnection");
             services.AddDbContext<MSProductsDB>(options => options.UseSqlServer(conn));
 
 
