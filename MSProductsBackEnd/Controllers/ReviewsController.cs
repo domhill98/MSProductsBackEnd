@@ -25,7 +25,7 @@ namespace MSProductsBackEnd.API.Controllers
         [HttpGet("{prodID}")]
         public ActionResult<IEnumerable<Review>> GetReviews(Guid prodID)
         {
-            var reviews = _context.Reviews.Where(x => x.ProductId == prodID || x.Show == true).AsEnumerable();
+            var reviews = _context.Reviews.Where(x => x.ProductId == prodID && x.Show == true).AsEnumerable();
 
             return Ok(reviews);
         }

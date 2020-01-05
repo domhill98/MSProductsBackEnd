@@ -31,12 +31,6 @@ namespace MSProductsBackEnd.API
             services.AddDbContext<MSProductsDB>(options => options.UseSqlServer(conn));
 
 
-            //Test with the live conn string
-            //string liveConn = "Server=tcp:msproducts.database.windows.net,1433;Initial Catalog=MSProductsDB;Persist Security Info=False;User ID=s6007824;Password=Rubbertoast2!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //services.AddDbContext<MSProductsDB>(options => options.UseSqlServer(liveConn));
-
-
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
