@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MSProductsBackEnd.API.Models;
@@ -18,6 +19,7 @@ namespace MSProductsBackEnd.API.Controllers
 
     [Route("api/Products")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
 
@@ -29,7 +31,7 @@ namespace MSProductsBackEnd.API.Controllers
         }
 
        
-        [HttpGet]
+        [HttpGet]     
         public ActionResult<IEnumerable<Product>> GetProducts()
         {
             var products = _context.Products.Include(p => p.Brand).Include(p => p.Category).AsEnumerable();
@@ -94,9 +96,11 @@ namespace MSProductsBackEnd.API.Controllers
             return Ok(product.Price);           
         }
 
-        [HttpPost("Price/{prodID}")]
+        [HttpPost("Price/{prodID}")]    
         public async Task<ActionResult> SetResellPrice(Guid prodID, [FromBody] decimal price) 
         {
+            var userRole = User.Claims.FirstOrDefault(x => x.Type == "role")?.Value;
+
             var product = await _context.Products.FindAsync(prodID);
 
             if(product == null) 
