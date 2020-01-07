@@ -55,13 +55,6 @@ namespace MSProductsBackEnd.API
                 });
 
 
-           
-       
-
-
-
-
-
             //DB Connection
             var conn = Configuration.GetConnectionString("DBConnection");
             services.AddDbContext<MSProductsDB>(options => options.UseSqlServer(conn));
