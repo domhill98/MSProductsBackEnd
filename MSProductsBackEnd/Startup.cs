@@ -50,9 +50,13 @@ namespace MSProductsBackEnd.API
 
             //DB Connection
             var conn = Configuration.GetConnectionString("DBConnection");
-            services.AddDbContext<MSProductsDB>(options => options.UseSqlServer(conn));
+            services.AddDbContext<MSProductsDB>(options => options.UseSqlServer(conn, OptionsBuilder => 
+            {
+                OptionsBuilder.EnableRetryOnFailure(3, TimeSpan.FromSeconds(10), null);
+            }));
 
-            
+
+
             //Because the auth service isnt implimented, use this to nullify all the auth code in the service
             services.AddMvc(options =>
             options.Filters.Add(new AllowAnonymousFilter())).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

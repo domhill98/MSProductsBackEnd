@@ -77,7 +77,8 @@ namespace MSProductsBackEnd.Data
                 x.Property(p => p.productId).IsRequired();
                 x.Property(p => p.userId).IsRequired();
             });
-
         }
+
+
     }
 }
