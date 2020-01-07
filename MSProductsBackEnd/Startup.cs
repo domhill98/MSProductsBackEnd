@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -32,13 +33,32 @@ namespace MSProductsBackEnd.API
             //Auth Settings
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options => 
+            //services.AddAuthentication("Bearer")
+            //    .AddJwtBearer("Bearer", options => 
+            //    {
+            //        //This auth server location would go here
+            //        options.Authority = "";
+            //        options.Audience = "MSProductsBE";
+            //    });
+
+
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"c:\temp-keys"))
+                .ProtectKeysWithDpapi()
+                .SetApplicationName("SharedCookies");
+
+            services.AddAuthentication("Cookies")
+                .AddCookie("Cookies", options =>
                 {
-                    //This auth server location would go here
-                    options.Authority = "";
-                    options.Audience = "MSProductsBE";
+                    options.Cookie.Name = ".AspNet.SharedCookie";
+                    options.Cookie.Domain = ".azurewebsites.net";
                 });
+
+
+           
+       
+
+
 
 
 
@@ -46,7 +66,7 @@ namespace MSProductsBackEnd.API
             var conn = Configuration.GetConnectionString("DBConnection");
             services.AddDbContext<MSProductsDB>(options => options.UseSqlServer(conn));
 
-
+            
             //Because the auth service isnt implimented, use this to nullify all the auth code in the service
             services.AddMvc(options =>
             options.Filters.Add(new AllowAnonymousFilter())).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

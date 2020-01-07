@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSProductsBackEnd.API", "MS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSProductsBackEnd.Data", "AzureDBConn\MSProductsBackEnd.Data.csproj", "{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSProductsBackEnd.UnitTests", "MSProductsBackEnd.UnitTests\MSProductsBackEnd.UnitTests.csproj", "{2FF0D318-D558-4D1E-956B-EA018AE03E4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8D6C1CE-C4C5-4BFC-9065-4CBB398EF339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF0D318-D558-4D1E-956B-EA018AE03E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF0D318-D558-4D1E-956B-EA018AE03E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF0D318-D558-4D1E-956B-EA018AE03E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF0D318-D558-4D1E-956B-EA018AE03E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

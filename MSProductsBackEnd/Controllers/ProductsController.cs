@@ -154,7 +154,7 @@ namespace MSProductsBackEnd.API.Controllers
         [HttpPost("Resell")]
         public async Task<ActionResult> UpdateResellHistory([FromBody] ResellHistory dto) 
         {
-            if(dto.productId == null) 
+            if(dto.productId == Guid.Empty) 
             {
                 return BadRequest();
             }
@@ -174,6 +174,21 @@ namespace MSProductsBackEnd.API.Controllers
         }
 
 
+        public async Task<ActionResult> AddnewProdct([FromBody] Product dto) 
+        {
+            try 
+            {
+                dto.Id = Guid.NewGuid();
+                _context.Products.Add(dto);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch(Exception e) 
+            {
+                return BadRequest(e);
+            }
+
+        }
 
 
 
