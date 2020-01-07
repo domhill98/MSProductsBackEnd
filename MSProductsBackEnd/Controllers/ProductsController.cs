@@ -67,11 +67,11 @@ namespace MSProductsBackEnd.API.Controllers
                 return Ok(prods);
             }
 
-            if (filter.categoryId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (filter.categoryId != Guid.Empty)
             {
                 prods = prods.Where(x => x.CategoryId == filter.categoryId);
             }
-            if (filter.brandId != Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (filter.brandId != Guid.Empty)
             {
                 prods = prods.Where(x => x.BrandId == filter.brandId);
             }

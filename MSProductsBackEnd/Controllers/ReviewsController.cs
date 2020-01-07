@@ -45,13 +45,6 @@ namespace MSProductsBackEnd.API.Controllers
             }
             catch (Exception)
             {
-                //dto.Id = Guid.NewGuid();
-                //var tryAgain = CreateReview(dto);
-                
-                //if (tryAgain.Result.Result.ToString() == "Success")
-                //{
-                //    return Ok("Success");
-                //}
 
                 return BadRequest();
             }
