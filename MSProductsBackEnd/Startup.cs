@@ -33,19 +33,12 @@ namespace MSProductsBackEnd.API
             //Auth Settings
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            //services.AddAuthentication("Bearer")
-            //    .AddJwtBearer("Bearer", options => 
-            //    {
-            //        //This auth server location would go here
-            //        options.Authority = "";
-            //        options.Audience = "MSProductsBE";
-            //    });
 
-
-            services.AddDataProtection()
-                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"c:\temp-keys"))
-                .ProtectKeysWithDpapi()
-                .SetApplicationName("SharedCookies");
+            //This is usually how to pass cookies but cant at because it requires windows and isnt supported on azure
+            //services.AddDataProtection()
+            //    .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"c:\temp-keys"))
+            //    .ProtectKeysWithDpapi()
+            //    .SetApplicationName("SharedCookies");
 
             services.AddAuthentication("Cookies")
                 .AddCookie("Cookies", options =>
