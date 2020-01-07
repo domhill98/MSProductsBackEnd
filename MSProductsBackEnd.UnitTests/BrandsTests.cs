@@ -10,6 +10,7 @@ using Xunit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace MSProductsBackEnd.UnitTests
 {
@@ -53,6 +54,7 @@ namespace MSProductsBackEnd.UnitTests
                 Assert.AreEqual(brands[i].Id, resultList[i].Id);
                 Assert.AreEqual(brands[i].Name, resultList[i].Name);
             }
+
 
         }
 
